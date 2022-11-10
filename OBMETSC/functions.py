@@ -26,7 +26,7 @@ from databank import *
 
 
 # Function calculates the production profile for a renewable energy plant
-def output_power_production(input_technology, power_input, location, share_input_wind, share_input_pv):
+def output_power_production(input_technology: str, power_input, location, share_input_wind, share_input_pv):
     input_technology = str(input_technology)
     power_input = float(power_input)
     location = str(location)
@@ -447,8 +447,8 @@ def infrastructure_dimension(ptx_technology, infrastructure_type, distance, powe
 
     throughput = production_profile['production'].max()  #maximum throughput is design throughput of compressor
 
-    if infrastructure_type == "Pipeline":
-        gas_flow_hour = (throughput * 259.8 * 273) / (
+    if infrastructure_type == "Pipeline":#spez. Gaskonstante H2 462. Von Sauerstoff 259.8
+        gas_flow_hour = (throughput * 462 * 273) / (
                     transport_pressure * (10 ^ 5))  #volume flow with ideal gas law
         gas_flow = gas_flow_hour / (60 * 60)
         pipe_diameter = math.sqrt((4 / math.pi) * (gas_flow / (20 / 3.6)))
